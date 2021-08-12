@@ -57,8 +57,8 @@ const Searchers = () => {
                 <div className={styles.back} onClick={() => history.goBack()}><img src={back} alt='back'/></div>
                 <h1>Команда</h1>
             </div>
-            <div className={styles.addSearcher}>
-                <Link to={'/edit_searcher?quest_id=' + questID}>+ Добавить поисковика</Link>
+            <div>
+                <Link className={styles.addSearcher} to={'/edit_searcher?quest_id=' + questID}>+ Добавить поисковика</Link>
             </div>
             <CurrentQuest questID={questID} toggleModal={toggleModal}/>
         </div>

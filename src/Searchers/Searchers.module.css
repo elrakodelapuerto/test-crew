@@ -75,6 +75,7 @@ h3 {
     margin: 0;
 }
 .addSearcher {
+    display: block;
     padding: 10px;
     margin-bottom: 20px;
     margin-top: 20px;
@@ -82,8 +83,6 @@ h3 {
     border-radius: 5px;
     text-align: center;
     border: 1px dashed #fe4d3b;
-}
-.addSearcher a {
     text-decoration: none;
     color: #fe4d3b;
 }
