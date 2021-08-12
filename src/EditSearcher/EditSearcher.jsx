@@ -97,7 +97,7 @@ const EditSearcher = () => {
                         <option value="коорд">Коорд</option>
                     </select>
                 </label>
-                <input type="submit" value="Отправить"/>
+                <input type="submit" value="Добавить"/>
             </form>
         </div>
 
