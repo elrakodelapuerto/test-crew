@@ -3,10 +3,10 @@ import styles from './Searchers.module.css'
 import back from '../assets/img/back.svg'
 import add from '../assets/img/add.svg'
 import {CurrentQuest} from "./CurrentQuest";
-import EditSearcher from "../EditSearcher/EditSearcher";
+import AddSearcher from "../EditSearcher/AddSearcher";
 import {useState} from "react";
 
-const Searchers = () => {
+const Searchers = ({setSearcherData}) => {
     const [activeModal, setActiveModal] = useState(false)
     const [modal, setModal] = useState([])
     const history = useHistory();
@@ -23,10 +23,11 @@ const Searchers = () => {
                 </div>
                 <div>
                     <ul>
-                        <li>Сменить статус</li>
-                        <li>Редактировать</li>
-                        <li>В экипаж</li>
-                        <li>Удалить</li>
+                        <li className={styles.modalButton} >Сменить статус</li>
+                        <li>
+                            <Link className={styles.modalButton} onClick={() => setSearcherData(searcher)} to={'/edit_searcher?quest_id=' + questID}>Редактировать</Link></li>
+                        <li className={styles.modalButton} >В экипаж</li>
+                        <li className={styles.modalButton} >Удалить</li>
                     </ul>
                 </div>
             </div>
@@ -58,7 +59,7 @@ const Searchers = () => {
                 <h1>Команда</h1>
             </div>
             <div>
-                <Link className={styles.addSearcher} to={'/edit_searcher?quest_id=' + questID}>+ Добавить поисковика</Link>
+                <Link className={styles.addSearcher} to={'/add_searcher?quest_id=' + questID}>+ Добавить поисковика</Link>
             </div>
             <CurrentQuest questID={questID} toggleModal={toggleModal}/>
         </div>

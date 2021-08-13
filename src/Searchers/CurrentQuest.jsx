@@ -48,7 +48,7 @@ export function CurrentQuest({questID, toggleModal}) {
 
     useEffect(() => {
         base('Searchers').select().all((error, records) => {
-            const searchers = records.map(record => record.fields)
+            const searchers = records.map(record => ({...record.fields, 'searchers_table_id': record.id}))
 
             base('CrewMeta').select(
                 {
@@ -57,7 +57,7 @@ export function CurrentQuest({questID, toggleModal}) {
             ).all((error, records) => {
                 test['currentQuest'] = records.map(record => ({
                     ...record.fields,
-                    table_id: record.id, ...searchers.find(s => s["searcher_id"] === record.fields.searcher_id)
+                    meta_table_id: record.id, ...searchers.find(s => s["searcher_id"] === record.fields.searcher_id)
                 }));
                 console.log(test);
                 setCrews({...test});
@@ -69,18 +69,9 @@ export function CurrentQuest({questID, toggleModal}) {
 
     function uniteCrew() {
         const data = []
-        selectedSearchers.forEach(searcher => {
-            console.log(searcher);
-            data.push({
-                id: searcher.table_id,
-                fields: {
-                    searcher_status: "готов"
-                }
-            })
-        })
         base('CrewMeta').update(data, (error, records) => {
             records.forEach(record => {
-                test.currentQuest.find(searcher => searcher.table_id === record.id).searcher_status = record.fields.searcher_status
+                test.currentQuest.find(searcher => searcher.meta_table_id === record.id).searcher_status = record.fields.searcher_status
                 setCrews({...test});
             })
         });

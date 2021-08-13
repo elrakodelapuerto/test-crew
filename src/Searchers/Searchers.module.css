@@ -12,7 +12,7 @@
 }
 .separator {
     height: 1px;
-    background: #d9d9d9;
+    background: #f1f1f1;
     width: 100%;
 }
 .searcherHeader {
@@ -23,6 +23,9 @@
 .searcherBody {
     margin-top: 10px;
     font-size: 14px;
+}
+.searcherBody > div{
+    margin-top: 5px;
 }
 .searcherCallSign {
     display: inline-flex;
@@ -116,9 +119,14 @@ h3 {
     margin: 0;
 }
 .modal ul li {
+}
+.modalButton{
+    display: block;
+    text-decoration: none;
+    color: #212121;
     padding: 10px 20px 10px 20px;
 }
-.modal ul li:hover {
+.modalButton:hover {
     background: #f3f3f3;
     color: #fe4d3b;
 }

@@ -6,9 +6,12 @@ import {
 } from "react-router-dom";
 import Quests from "./Quests/Quests";
 import Searchers from "./Searchers/Searchers";
+import AddSearcher from "./EditSearcher/AddSearcher";
 import EditSearcher from "./EditSearcher/EditSearcher";
 
 const App = () => {
+    const [searcherData, setSearcherData] = useState({})
+
     return (
         <Router>
             <Switch>
@@ -16,10 +19,13 @@ const App = () => {
                     <Quests />
                 </Route>
                 <Route path={"/crew"}>
-                    <Searchers />
+                    <Searchers setSearcherData={setSearcherData} />
+                </Route>
+                <Route path={"/add_searcher"}>
+                    <AddSearcher />
                 </Route>
                 <Route path={"/edit_searcher"}>
-                    <EditSearcher />
+                    <EditSearcher searcherData={searcherData} setSearcherData={searcherData} />
                 </Route>
             </Switch>
         </Router>

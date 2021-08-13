@@ -6,14 +6,12 @@ import {useEffect} from "react";
 
 let base = new Airtable({apiKey: 'keyHvrSKnN3fo7ORx'}).base('appou4euyZ2UDPPEg');
 
-const EditSearcher = ({searcherData, setSearcherData}) => {
+const AddSearcher = () => {
     let history = useHistory();
-    console.log(searcherData);
 
     function useQuery() {
         return new URLSearchParams(useLocation().search);
     }
-
     useEffect( () => {
         document.body.style.overflowY = "auto";
     }, [] )
@@ -24,23 +22,24 @@ const EditSearcher = ({searcherData, setSearcherData}) => {
         e.preventDefault()
         const formData = Object.fromEntries(new FormData(e.target))
         const time = new Date(formData["searcher_time"]).toISOString()
-        const meta_data = {
+        const metaData = {
             quest_id: parseInt(questID),
+            searcher_crew: 0,
             searcher_id: parseInt(formData["searcher_id"]),
             searcher_place: formData["searcher_place"],
             searcher_role: [formData["searcher_role"]],
+            searcher_status: 'готов',
             searcher_time: time
         }
-        const searcher_data = {
+        const searcherData = {
             searcher_id: parseInt(formData["searcher_id"]),
             searcher_phone: formData["searcher_phone"],
             call_sign: formData["call_sign"],
         }
 
-        base('CrewMeta').update([
+        base('CrewMeta').create([
             {
-                "id": searcherData.meta_table_id,
-                "fields": meta_data
+                "fields": metaData
             }
         ], function (err, records) {
             if (err) {
@@ -51,10 +50,9 @@ const EditSearcher = ({searcherData, setSearcherData}) => {
                 console.log(record.getId());
             });
         });
-        base('Searchers').update([
+        base('Searchers').create([
             {
-                "id": searcherData.searchers_table_id,
-                "fields": searcher_data
+                "fields": searcherData
             }
         ], function (err, records) {
             if (err) {
@@ -69,44 +67,44 @@ const EditSearcher = ({searcherData, setSearcherData}) => {
 
     return <div className={styles.editSearcher}>
         <div className={styles.header}><div className={styles.back} onClick={() => history.goBack()}><img src={back} alt='back'/></div>
-            <h1>Редакировать</h1>
+            <h1>Добавить</h1>
         </div>
         <div>
             <form className={styles.form} onSubmit={(e) => updateSearcher(e)}>
                 <label>
                     Позывной:
-                    <input type="text" name="call_sign" defaultValue={searcherData.call_sign}/>
+                    <input type="text" name="call_sign"/>
                 </label>
                 <label>
                     @id:
-                    <input type="number" name="searcher_id" defaultValue={searcherData.searcher_id}/>
+                    <input type="number" name="searcher_id"/>
                 </label>
                 <label>
                     Номер телефона:
-                    <input type="phone" name="searcher_phone" defaultValue={searcherData.searcher_phone}/>
+                    <input type="phone" name="searcher_phone"/>
                 </label>
                 <label>
                     Адрес:
-                    <input type="text" name="searcher_place" defaultValue={searcherData.searcher_place}/>
+                    <input type="adress" name="searcher_place"/>
                 </label>
                 <label>
                     Время:
-                    <input type="datetime-local" name="searcher_time" defaultValue={searcherData.searcher_time.substring(0, 16)}/>
+                    <input type="datetime-local" name="searcher_time"/>
                 </label>
                 <label>
                     Роль:
-                    <select name="searcher_role" multiple={false} defaultValue={searcherData.searcher_role}>
-                        <option value="пеший">Пеший</option>
+                    <select name="searcher_role">
+                        <option selected value="пеший">Пеший</option>
                         <option value="пилот">Пилот</option>
                         <option value="инфорг">Инфорг</option>
                         <option value="снм">СНМ</option>
                         <option value="коорд">Коорд</option>
                     </select>
                 </label>
-                <input type="submit" value="Редактировать"/>
+                <input type="submit" value="Добавить"/>
             </form>
         </div>
 
     </div>
 }
-export default EditSearcher;
+export default AddSearcher;
