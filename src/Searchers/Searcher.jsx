@@ -1,5 +1,7 @@
 import styles from "./Searchers.module.css";
 import isPilot from "../assets/img/pilot.svg";
+import iconTime from "../assets/img/time.svg";
+import iconPlace from "../assets/img/place.svg";
 
 export function Searcher({searcher, getTime, toggleModal, lite=false}) {
 
@@ -15,10 +17,12 @@ export function Searcher({searcher, getTime, toggleModal, lite=false}) {
         </div>
         {!lite && <div className={styles.searcherBody}>
             <div>
-                {searcher_place}
+                <span><img src={iconPlace} /></span>
+                <span>{searcher_place}</span>
             </div>
             <div>
-                {getTime(searcher_time)}
+                <span><img src={iconTime} /></span>
+                <span>{getTime(searcher_time)}</span>
             </div>
         </div>
         }
