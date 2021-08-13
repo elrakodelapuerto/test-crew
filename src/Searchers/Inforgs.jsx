@@ -1,21 +1,15 @@
 import styles from "./Searchers.module.css";
+import {Searcher} from "./Searcher";
 
-export function Inforgs({crews}) {
+export function Inforgs({crews, toggleModal}) {
     return <div>
         <div className={styles.separator}></div>
         <h3>Инфорги:</h3>
         {
-            crews.inforgs && crews.inforgs.map((searcher) => {
-                const {searcher_phone, call_sign} = searcher;
-                return (
-                    <div className={styles.searcher}>
-                        <div>
-                            <div>{call_sign}</div>
-                            <div>{searcher_phone}</div>
-                        </div>
-                    </div>
-                );
-            })
+            crews.inforgs && crews.inforgs.map((searcher) => (
+                <Searcher toggleModal={toggleModal} lite={true} searcher={searcher}></Searcher>
+                )
+            )
         }
     </div>
 }

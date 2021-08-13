@@ -1,7 +1,7 @@
 import styles from "./Searchers.module.css";
 import isPilot from "../assets/img/pilot.svg";
 
-export function Searcher({select, searcher, getTime, toggleModal}) {
+export function Searcher({searcher, getTime, toggleModal, lite=false}) {
 
     const {searcher_role, searcher_phone, searcher_time, call_sign, searcher_place} = searcher;
     return <div onClick={() => toggleModal(searcher)} className={styles.searcher}>
@@ -13,7 +13,7 @@ export function Searcher({select, searcher, getTime, toggleModal}) {
             </div>
             <div>{searcher_phone}</div>
         </div>
-        <div className={styles.searcherBody}>
+        {!lite && <div className={styles.searcherBody}>
             <div>
                 {searcher_place}
             </div>
@@ -21,5 +21,6 @@ export function Searcher({select, searcher, getTime, toggleModal}) {
                 {getTime(searcher_time)}
             </div>
         </div>
+        }
     </div>;
 }

@@ -2,7 +2,6 @@ import styles from "./Searchers.module.css";
 import {Searcher} from "./Searcher";
 
 export function Statuses({crews, setSelected, selectedSearchers, toggleModal}) {
-
     function getTime(searcher_time) {
         const date = new Date(searcher_time);
         const now = new Date()
@@ -28,6 +27,9 @@ export function Statuses({crews, setSelected, selectedSearchers, toggleModal}) {
     return <div className={styles.status}>
         {crews && crews.statuses && Object.keys(crews.statuses).map(status => {
             if (crews.statuses[status].length > 0) {
+                const lite = (status === 'готов' || status === 'в пути на задачу') ? false : true;
+                // console.log(status, ': ', lite)
+
                 if (status === 'в пути на задачу') {
                     return <div>
                         <div className={styles.separator}></div>
@@ -37,7 +39,7 @@ export function Statuses({crews, setSelected, selectedSearchers, toggleModal}) {
                                 {crew.length > 0 && <h4>{index === 0 ? 'Ждут экипаж' : 'Экипаж #' + index}</h4>}
                                 {crew && crew.map(searcher => (
                                     searcher &&
-                                    <Searcher toggleModal={toggleModal} searcher={searcher} getTime={getTime} select={select}></Searcher>
+                                    <Searcher lite={lite} toggleModal={toggleModal} searcher={searcher} getTime={getTime} select={select}></Searcher>
                                 ))}
                             </div>
                         ))}
@@ -47,7 +49,7 @@ export function Statuses({crews, setSelected, selectedSearchers, toggleModal}) {
                         <div className={styles.separator}></div>
                         <h3>{status}:</h3>
                         {crews.statuses[status] && crews.statuses[status].map(searcher => (
-                            searcher && <Searcher toggleModal={toggleModal} searcher={searcher} getTime={getTime} select={select}></Searcher>
+                            searcher && <Searcher lite={lite} toggleModal={toggleModal} searcher={searcher} getTime={getTime} select={select}></Searcher>
                         ))}
                     </div>
                 }

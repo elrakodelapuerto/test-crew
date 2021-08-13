@@ -87,7 +87,7 @@ export function CurrentQuest({questID, toggleModal}) {
     }
 
     return <div>
-                <Inforgs crews={crews}/>
+                <Inforgs toggleModal={toggleModal} crews={crews}/>
                 <Statuses toggleModal={toggleModal} crews={crews} setSelected={setSelected} selectedSearchers={selectedSearchers} />
                 <div>
                     {selectedSearchers && selectedSearchers.map(searcher => {
