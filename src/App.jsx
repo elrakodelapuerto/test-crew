@@ -18,13 +18,13 @@ const App = () => {
                 <Route path={"/"} exact>
                     <Quests />
                 </Route>
-                <Route path={"/crew"}>
+                <Route exact path={"/crew"}>
                     <Searchers setSearcherData={setSearcherData} />
                 </Route>
-                <Route path={"/add_searcher"}>
+                <Route exact path={"/add_searcher"}>
                     <AddSearcher />
                 </Route>
-                <Route path={"/edit_searcher"}>
+                <Route exact path={"/edit_searcher"}>
                     <EditSearcher searcherData={searcherData} setSearcherData={searcherData} />
                 </Route>
             </Switch>
