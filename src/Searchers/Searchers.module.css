@@ -46,7 +46,8 @@
     height: 12px;
 }
 
-.searcherBody > div
+.searcherBody > div,
+.modalSearcherBody > div
 {
     margin-top: 7px;
 }

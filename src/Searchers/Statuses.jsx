@@ -2,17 +2,6 @@ import styles from "./Searchers.module.css";
 import {Searcher} from "./Searcher";
 
 export function Statuses({crews, setSelected, selectedSearchers, toggleModal}) {
-    function getTime(searcher_time) {
-        const date = new Date(searcher_time);
-        const now = new Date()
-        const tomorrow = new Date();
-        tomorrow.setDate(tomorrow.getDate() + 1);
-
-        const day = now.toLocaleDateString() === date.toLocaleDateString() ? 'Сегодня' : tomorrow.toLocaleDateString() === date.toLocaleDateString() ? 'Завтра' : date.toLocaleDateString()
-        const time = date.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
-        return day + ' ' + time;
-    }
-
     function select(searcher) {
         const selected = [...selectedSearchers];
         let index = selectedSearchers.indexOf(searcher);
@@ -39,7 +28,7 @@ export function Statuses({crews, setSelected, selectedSearchers, toggleModal}) {
                                 {crew.length > 0 && <h4>{index === 0 ? 'Ждут экипаж' : 'Экипаж #' + index}</h4>}
                                 {crew && crew.map(searcher => (
                                     searcher &&
-                                    <Searcher lite={lite} toggleModal={toggleModal} searcher={searcher} getTime={getTime} select={select}></Searcher>
+                                    <Searcher lite={lite} toggleModal={toggleModal} searcher={searcher} select={select}></Searcher>
                                 ))}
                             </div>
                         ))}
@@ -49,7 +38,7 @@ export function Statuses({crews, setSelected, selectedSearchers, toggleModal}) {
                         <div className={styles.separator}></div>
                         <h3>{status}:</h3>
                         {crews.statuses[status] && crews.statuses[status].map(searcher => (
-                            searcher && <Searcher lite={lite} toggleModal={toggleModal} searcher={searcher} getTime={getTime} select={select}></Searcher>
+                            searcher && <Searcher lite={lite} toggleModal={toggleModal} searcher={searcher} select={select}></Searcher>
                         ))}
                     </div>
                 }

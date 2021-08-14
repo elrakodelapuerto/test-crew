@@ -50,19 +50,22 @@ const EditSearcher = ({searcherData, setSearcherData}) => {
             records.forEach(function (record) {
                 console.log(record.getId());
             });
-        });
-        base('Searchers').update([
-            {
-                "id": searcherData.searchers_table_id,
-                "fields": searcher_data
-            }
-        ], function (err, records) {
-            if (err) {
-                console.error(err);
-                return;
-            }
-            records.forEach(function (record) {
-                console.log(record.getId());
+
+            base('Searchers').update([
+                {
+                    "id": searcherData.searchers_table_id,
+                    "fields": searcher_data
+                }
+            ], function (err, records) {
+                if (err) {
+                    console.error(err);
+                    return;
+                }
+                records.forEach(function (record) {
+                    console.log(record.getId());
+                });
+
+                history.goBack();
             });
         });
     }

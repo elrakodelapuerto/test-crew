@@ -7,6 +7,7 @@ import AddSearcher from "../EditSearcher/AddSearcher";
 import {useState} from "react";
 import iconTime from "../assets/img/time.svg";
 import iconPlace from "../assets/img/place.svg";
+import {getTime} from "../helpers";
 
 const Searchers = ({setSearcherData}) => {
     const [activeModal, setActiveModal] = useState(false)
@@ -27,6 +28,10 @@ const Searchers = ({setSearcherData}) => {
                     <div>
                         <span><img src={iconPlace} /></span>
                         <span>{searcher.searcher_place}</span>
+                    </div>
+                    <div>
+                        <span><img src={iconTime} /></span>
+                        <span>{getTime(searcher.searcher_time)}</span>
                     </div>
                 </div>
                 <div>

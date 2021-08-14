@@ -49,18 +49,19 @@ const AddSearcher = () => {
             records.forEach(function (record) {
                 console.log(record.getId());
             });
-        });
-        base('Searchers').create([
-            {
-                "fields": searcherData
-            }
-        ], function (err, records) {
-            if (err) {
-                console.error(err);
-                return;
-            }
-            records.forEach(function (record) {
-                console.log(record.getId());
+            base('Searchers').create([
+                {
+                    "fields": searcherData
+                }
+            ], function (err, records) {
+                if (err) {
+                    console.error(err);
+                    return;
+                }
+                records.forEach(function (record) {
+                    console.log(record.getId());
+                    history.goBack();
+                });
             });
         });
     }
