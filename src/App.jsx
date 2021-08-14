@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {
     BrowserRouter as Router,
     Switch,
-    Route, match, useRouteMatch
+    Route, match, useRouteMatch, MemoryRouter
 } from "react-router-dom";
 import Quests from "./Quests/Quests";
 import Searchers from "./Searchers/Searchers";
@@ -14,20 +14,18 @@ const App = () => {
 
     return (
         <Router>
-            <Switch>
-                <Route path={"/"} exact>
-                    <Quests />
-                </Route>
-                <Route exact path={"/crew"}>
-                    <Searchers setSearcherData={setSearcherData} />
-                </Route>
-                <Route exact path={"/add_searcher"}>
-                    <AddSearcher />
-                </Route>
-                <Route exact path={"/edit_searcher"}>
-                    <EditSearcher searcherData={searcherData} setSearcherData={searcherData} />
-                </Route>
-            </Switch>
+            <Route path={"/"} exact>
+                <Quests />
+            </Route>
+            <Route exact path={"/crew"}>
+                <Searchers setSearcherData={setSearcherData} />
+            </Route>
+            <Route exact path={"/add_searcher"}>
+                <AddSearcher />
+            </Route>
+            <Route exact path={"/edit_searcher"}>
+                <EditSearcher searcherData={searcherData} setSearcherData={searcherData} />
+            </Route>
         </Router>
     );
 }
