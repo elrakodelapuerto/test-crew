@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {
     BrowserRouter as Router,
     Switch,
-    Route, match, useRouteMatch, MemoryRouter
+    Route, match, useRouteMatch, MemoryRouter, Redirect
 } from "react-router-dom";
 import Quests from "./Quests/Quests";
 import Searchers from "./Searchers/Searchers";
@@ -14,7 +14,10 @@ const App = () => {
 
     return (
         <Router>
-            <Route path={"/"} exact>
+            <Route path={"/"}>
+                <Redirect to={'/quests'} />
+            </Route>
+            <Route path={"/quests"} exact>
                 <Quests />
             </Route>
             <Route exact path={"/crew"}>
